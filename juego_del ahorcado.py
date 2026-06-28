@@ -77,10 +77,19 @@ print(f"\nLa palabra secreta elegida tiene {len(palabra_juego)} letras. ¡A juga
 # El juego corre mientras queden intentos
 while intentos_restantes > 0:
     
+    equivalencias = {
+    "á": "a",
+    "é": "e",
+    "í": "i",
+    "ó": "o",
+    "ú": "u"
+}
+
     # 1. Mostrar la palabra oculta 
     palabra_oculta = ""
     for letra in palabra_juego:
-        if letra in letras_adivinadas:
+        letra_comparar = equivalencias.get(letra,letra)
+        if letra_comparar in letras_adivinadas:
             palabra_oculta += letra + " "
         else:
             palabra_oculta += "_ "
@@ -108,7 +117,17 @@ while intentos_restantes > 0:
 
     # 4. Procesar la letra
     letras_adivinadas.append(letra_usuario)
-
+equivalencias = {
+    "a": ["a", "á"],
+    "e": ["e", "é"],
+    "i": ["i", "í"],
+    "o": ["o", "ó"],
+    "u": ["u", "ú"]
+}
+if letra_usuario in equivalencias:
+    letras_a_buscar = equivalencias[letra_usuario]
+else:
+    letras_a_buscar = [letra_usuario]
     if letra_usuario in palabra_juego:
         print("✨ ¡Bien hecho! La letra está en la palabra.")
     else:
